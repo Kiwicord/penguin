@@ -1,10 +1,10 @@
 # Penguin
 A python discord bot written in hikari.
-## Support
+### Support
 The bot supports only slash commands. Maybe prefix commands in the future.
-## Website
+### Website
 Website is coming soon.
-## Example
+### Example
 ```py
 @bot.listen(hikari.GuildMessageCreateEvent)
 async def on_message(event):
