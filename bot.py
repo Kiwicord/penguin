@@ -2,9 +2,11 @@ import hikari
 import lightbulb
 import miru
 import datetime
+import random
 
 from os import getenv
 from dotenv import load_dotenv
+from pexels_api import API
 
 load_dotenv()
 
@@ -15,6 +17,8 @@ bot = lightbulb.BotApp(
 )
 
 miru.load(bot)
+
+api = API(getenv('API_KEY'))
 
 @bot.command
 @lightbulb.command(name='invite', description='Invite Penguin to your discord server.')
@@ -34,5 +38,28 @@ async def invite_cmd(ctx):
     view.add_item(button)
 
     await ctx.respond(embed, components=view.build())
+
+@bot.command
+@lightbulb.command(name='penguin', description='Sends a random penguin image.')
+@lightbulb.implements(lightbulb.SlashCommand)
+async def random_penguin(ctx):
+    api.search('penguin', page=1, results_per_page=70)
+    photos = api.get_entries()
+
+    penguin = random.choice(photos)
+
+    embed = (
+        hikari.Embed(
+            title='🐧🐧🐧🐧🐧',
+            color=0xffffff,
+            timestamp=datetime.datetime.now().astimezone()
+        )
+        .set_image(penguin.original)
+        .set_footer(f'Requested by {ctx.author  }')
+    )
+
+    await ctx.respond(embed)
+
+
 
 bot.run()
