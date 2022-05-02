@@ -1,8 +1,6 @@
 import hikari
 import lightbulb
 import miru
-import os
-import datetime
 
 from os import getenv
 from dotenv import load_dotenv
