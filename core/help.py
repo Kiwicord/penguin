@@ -30,9 +30,6 @@ class HelpView(miru.View):
             dm_channel = await ctx.author.fetch_dm_channel()
             await dm_channel.send(moderation_embed)
 
-# @plugin.command()
-# @lightbulb.command(name='help', description='An overview of all bot commands')
-# @lightbulb.implements(lightbulb.SlashCommand)
 @plugin.listener(hikari.GuildMessageCreateEvent)
 async def help_cmd(event):
     if event.is_bot or not event.content:
