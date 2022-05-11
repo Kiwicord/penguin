@@ -42,11 +42,11 @@ async def help_cmd(ctx):
         )
         .set_footer(f'Requested by {ctx.author}')
     )
-    view = HelpView()
+    view = HelpView(timeout=60)
     msg = await ctx.respond(embed, components=view.build())
     view.start(message=await msg.message())
     await view.wait()
-    await ctx.respond('view timed out loil')
+    await msg.delete()
 
 def load(bot):
     bot.add_plugin(plugin)
